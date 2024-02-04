@@ -1,4 +1,4 @@
-package kr.aling.admin.managepost.dto.valid;
+package kr.aling.admin.managepost.type;
 
 /**
  * 관리 게시글 분류 Enum.
