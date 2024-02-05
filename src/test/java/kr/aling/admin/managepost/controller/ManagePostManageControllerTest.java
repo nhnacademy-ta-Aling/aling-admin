@@ -4,6 +4,7 @@ package kr.aling.admin.managepost.controller;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -25,6 +26,7 @@ import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 import kr.aling.admin.managepost.dummy.ManagePostDummy;
 import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.service.ManagePostManageService;
+import kr.aling.admin.user.exception.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,7 +81,7 @@ class ManagePostManageControllerTest {
         perform.andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.managePostNo", equalTo(managePostNo)));
+                .andExpect(jsonPath("$.data.managePostNo", equalTo(managePostNo)));
 
         // docs
         perform.andDo(document("register-manage-post",
@@ -92,7 +94,9 @@ class ManagePostManageControllerTest {
                         fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
                 ),
                 responseFields(
-                        fieldWithPath("managePostNo").type(JsonFieldType.NUMBER).description("관리게시글 번호")
+                        fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("응답 성공여부"),
+                        fieldWithPath("message").type(JsonFieldType.STRING).description("에러 시 메세지"),
+                        fieldWithPath("data.managePostNo").type(JsonFieldType.NUMBER).description("관리게시글 번호")
                 )));
     }
 
@@ -109,6 +113,26 @@ class ManagePostManageControllerTest {
 
         // then
         perform.andDo(print()).andExpect(status().isBadRequest());
-        verify(managePostManageService, never()).registerManagePost(requestDto);
+        verify(managePostManageService, never()).registerManagePost(any(CreateManagePostRequestDto.class));
+    }
+
+    @Test
+    @DisplayName("관리게시글 등록 실패 - 회원을 찾지 못한 경우")
+    void registerManagePost_notFoundUser() throws Exception {
+        // given
+        CreateManagePostRequestDto requestDto = new CreateManagePostRequestDto(
+                managePost.getManagePostNo(), managePost.getType(), managePost.getTitle(), managePost.getContent()
+        );
+        when(managePostManageService.registerManagePost(any()))
+                .thenThrow(new UserNotFoundException(managePost.getManagePostNo()));
+
+        // when
+        ResultActions perform = mockMvc.perform(post("/api/v1/manageposts")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDto)));
+
+        // then
+        perform.andDo(print()).andExpect(status().isNotFound());
+        verify(managePostManageService, times(1)).registerManagePost(any(CreateManagePostRequestDto.class));
     }
 }

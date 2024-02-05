@@ -22,7 +22,7 @@ public class EnumValidator implements ConstraintValidator<ValidEnum, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         Enum<?>[] enumValues = constraintAnnotation.enumClass().getEnumConstants();
-        if (enumValues != null) {
+        if (value != null && enumValues != null) {
             for (Enum<?> enumValue : enumValues) {
                 if (value.equals(enumValue.name())) {
                     return true;

@@ -2,16 +2,17 @@ package kr.aling.admin.managepost.controller;
 
 import javax.validation.Valid;
 import kr.aling.admin.common.exception.CustomException;
+import kr.aling.admin.common.response.ApiResponse;
 import kr.aling.admin.managepost.dto.request.CreateManagePostRequestDto;
 import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 import kr.aling.admin.managepost.service.ManagePostManageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,13 +37,14 @@ public class ManagePostManageController {
      * @author : 이수정
      * @since : 1.0
      */
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<CreateManagePostResponseDto> registerManagePost(
+    public ApiResponse<CreateManagePostResponseDto> registerManagePost(
             @Valid @RequestBody CreateManagePostRequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new CustomException(HttpStatus.BAD_REQUEST,
                     "register manage post valid error - " + bindingResult.getAllErrors());
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(managePostManageService.registerManagePost(requestDto));
+        return new ApiResponse<>(true, "", managePostManageService.registerManagePost(requestDto));
     }
 }
