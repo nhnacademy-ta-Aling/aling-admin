@@ -14,6 +14,7 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -88,10 +89,14 @@ class ManagePostManageControllerTest {
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()),
                 requestFields(
-                        fieldWithPath("userNo").type(JsonFieldType.NUMBER).description("관리자 ID"),
-                        fieldWithPath("type").type(JsonFieldType.STRING).description("관리게시글 타입"),
-                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목"),
+                        fieldWithPath("userNo").type(JsonFieldType.NUMBER).description("관리자 ID")
+                                .attributes(key("valid").value("Not Null, 양수")),
+                        fieldWithPath("type").type(JsonFieldType.STRING).description("관리게시글 타입")
+                                .attributes(key("valid").value("NOTICE, FAQ, POLICY")),
+                        fieldWithPath("title").type(JsonFieldType.STRING).description("제목")
+                                .attributes(key("valid").value("Not Blank, 최대 100자")),
                         fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
+                                .attributes(key("valid").value("Not Blank"))
                 ),
                 responseFields(
                         fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("응답 성공여부"),
