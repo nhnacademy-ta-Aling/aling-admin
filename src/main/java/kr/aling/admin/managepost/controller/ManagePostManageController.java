@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since : 1.0
  */
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/manageposts")
+@RequestMapping("/api/v1/manage-posts")
 @RestController
 public class ManagePostManageController {
 

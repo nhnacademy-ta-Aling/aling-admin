@@ -12,6 +12,7 @@ import kr.aling.admin.managepost.service.ManagePostManageService;
 import kr.aling.admin.user.dto.request.IsExistsUserRequestDto;
 import kr.aling.admin.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +33,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class ManagePostManageServiceImpl implements ManagePostManageService {
 
-    private final String host = "127.0.0.1";
+    @Value("${aling.host}")
+    private String host;
 
     private final ManagePostManageRepository managePostManageRepository;
 

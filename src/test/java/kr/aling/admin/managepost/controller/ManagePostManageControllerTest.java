@@ -74,7 +74,7 @@ class ManagePostManageControllerTest {
         when(managePostManageService.registerManagePost(any())).thenReturn(responseDto);
 
         // when
-        ResultActions perform = mockMvc.perform(post("/api/v1/manageposts")
+        ResultActions perform = mockMvc.perform(post("/api/v1/manage-posts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)));
 
@@ -112,7 +112,7 @@ class ManagePostManageControllerTest {
         CreateManagePostRequestDto requestDto = new CreateManagePostRequestDto(0L, "", "", "");
 
         // when
-        ResultActions perform = mockMvc.perform(post("/api/v1/manageposts")
+        ResultActions perform = mockMvc.perform(post("/api/v1/manage-posts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)));
 
@@ -132,7 +132,7 @@ class ManagePostManageControllerTest {
                 .thenThrow(new UserNotFoundException(managePost.getManagePostNo()));
 
         // when
-        ResultActions perform = mockMvc.perform(post("/api/v1/manageposts")
+        ResultActions perform = mockMvc.perform(post("/api/v1/manage-posts")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(requestDto)));
 
