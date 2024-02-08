@@ -1,7 +1,9 @@
 package kr.aling.admin.user.dto.response;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * 회원 존재 여부 응답을 담는 Dto.
@@ -11,7 +13,8 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class IsExistsUserResponseDto {
 
-    private final Boolean isExists;
+    private Boolean isExists;
 }
