@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * 관리 게시글 CUD Service 구현체.
+ * 관리게시글 CUD Service 구현체.
  *
  * @author : 이수정
  * @since : 1.0
