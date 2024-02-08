@@ -10,13 +10,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import kr.aling.admin.common.response.ApiResponse;
 import kr.aling.admin.managepost.dto.request.CreateManagePostRequestDto;
 import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 import kr.aling.admin.managepost.dummy.ManagePostDummy;
 import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.repository.ManagePostManageRepository;
 import kr.aling.admin.managepost.service.ManagePostManageService;
+import kr.aling.admin.user.dto.response.IsExistsUserResponseDto;
 import kr.aling.admin.user.exception.UserNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,7 +53,7 @@ class ManagePostManageServiceImplTest {
         CreateManagePostRequestDto requestDto = new CreateManagePostRequestDto(
                 managePost.getManagePostNo(), managePost.getType(), managePost.getTitle(), managePost.getContent()
         );
-        ApiResponse<Boolean> isExistsUserResponse = new ApiResponse<>(true, "", Boolean.TRUE);
+        IsExistsUserResponseDto isExistsUserResponse = new IsExistsUserResponseDto(Boolean.TRUE);
 
         when(restTemplate.exchange(any(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
                 .thenReturn(ResponseEntity.ok(isExistsUserResponse));
@@ -77,7 +77,7 @@ class ManagePostManageServiceImplTest {
         CreateManagePostRequestDto requestDto = new CreateManagePostRequestDto(
                 managePost.getManagePostNo(), managePost.getType(), managePost.getTitle(), managePost.getContent()
         );
-        ApiResponse<Boolean> isExistsUserResponse = new ApiResponse<>(true, "", Boolean.FALSE);
+        IsExistsUserResponseDto isExistsUserResponse = new IsExistsUserResponseDto(Boolean.FALSE);
 
         when(restTemplate.exchange(any(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
                 .thenReturn(ResponseEntity.ok(isExistsUserResponse));
