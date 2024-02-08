@@ -82,7 +82,7 @@ class ManagePostManageControllerTest {
         perform.andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.data.managePostNo", equalTo(managePostNo)));
+                .andExpect(jsonPath("$.managePostNo", equalTo(managePostNo)));
 
         // docs
         perform.andDo(document("register-manage-post",
@@ -99,9 +99,7 @@ class ManagePostManageControllerTest {
                                 .attributes(key("valid").value("Not Blank"))
                 ),
                 responseFields(
-                        fieldWithPath("success").type(JsonFieldType.BOOLEAN).description("응답 성공여부"),
-                        fieldWithPath("message").type(JsonFieldType.STRING).description("에러 시 메세지"),
-                        fieldWithPath("data.managePostNo").type(JsonFieldType.NUMBER).description("관리게시글 번호")
+                        fieldWithPath("managePostNo").type(JsonFieldType.NUMBER).description("관리게시글 번호")
                 )));
     }
 

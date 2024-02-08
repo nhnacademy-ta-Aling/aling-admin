@@ -3,13 +3,13 @@ package kr.aling.admin.managepost.service.impl;
 import java.net.URI;
 import java.util.Objects;
 import javax.transaction.Transactional;
-import kr.aling.admin.common.response.ApiResponse;
 import kr.aling.admin.managepost.dto.request.CreateManagePostRequestDto;
 import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.repository.ManagePostManageRepository;
 import kr.aling.admin.managepost.service.ManagePostManageService;
 import kr.aling.admin.user.dto.request.IsExistsUserRequestDto;
+import kr.aling.admin.user.dto.response.IsExistsUserResponseDto;
 import kr.aling.admin.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,8 +51,8 @@ public class ManagePostManageServiceImpl implements ManagePostManageService {
 
         HttpEntity<IsExistsUserRequestDto> httpEntity = new HttpEntity<>(new HttpHeaders());
 
-        ResponseEntity<ApiResponse<Boolean>> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {});
-        if (Objects.requireNonNull(response.getBody()).getData().equals(Boolean.FALSE)) {
+        ResponseEntity<IsExistsUserResponseDto> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {});
+        if (Objects.requireNonNull(response.getBody()).getIsExists().equals(Boolean.FALSE)) {
             throw new UserNotFoundException(requestDto.getUserNo());
         }
 
