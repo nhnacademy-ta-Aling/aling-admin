@@ -1,9 +1,9 @@
 package kr.aling.admin.managepost.service;
 
-import java.awt.print.Pageable;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * 관리게시글 조회 Service interface.
@@ -32,5 +32,5 @@ public interface ManagePostReadService {
      * @author : 이수정
      * @since : 1.0
      */
-    Page<ReadManagePostResponseDto> getManagePost(long no);
+    ReadManagePostResponseDto getManagePost(long no);
 }

@@ -1,12 +1,12 @@
 package kr.aling.admin.managepost.service.impl;
 
-import java.awt.print.Pageable;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
 import kr.aling.admin.managepost.repository.ManagePostReadRepository;
 import kr.aling.admin.managepost.service.ManagePostReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +28,10 @@ public class ManagePostReadServiceImpl implements ManagePostReadService {
     @Transactional(readOnly = true)
     @Override
     public Page<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable) {
-        return null;
+        if (type != null) {
+            return managePostReadRepository.findAllByType(type, pageable);
+        }
+        return managePostReadRepository.findAllByAll(pageable);
     }
 
     /**
@@ -36,7 +39,7 @@ public class ManagePostReadServiceImpl implements ManagePostReadService {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<ReadManagePostResponseDto> getManagePost(long no) {
-        return null;
+    public ReadManagePostResponseDto getManagePost(long no) {
+        return managePostReadRepository.findByNo(no);
     }
 }

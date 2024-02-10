@@ -1,11 +1,11 @@
 package kr.aling.admin.managepost.controller;
 
-import java.awt.print.Pageable;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
 import kr.aling.admin.managepost.service.ManagePostReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +51,7 @@ public class ManagePostReadController {
      * @since : 1.0
      */
     @GetMapping("/{no}")
-    public ResponseEntity<Page<ReadManagePostResponseDto>> getManagePost(@PathVariable long no) {
+    public ResponseEntity<ReadManagePostResponseDto> getManagePost(@PathVariable long no) {
         return ResponseEntity.status(HttpStatus.OK).body(managePostReadService.getManagePost(no));
     }
 }
