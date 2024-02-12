@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author : 이수정
  * @since : 1.0
  */
-public interface ManagePostManageRepository extends JpaRepository<ManagePost, Long>, ManagePostReadRepositoryCustom {
+public interface ManagePostManageRepository extends JpaRepository<ManagePost, Long> {
 
 }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.stereotype.Repository;
 
 /**
  * QueryDsl 관리게시물 조회를 위한 repository.
@@ -19,9 +20,12 @@ import org.springframework.data.support.PageableExecutionUtils;
  * @author : 이수정
  * @since : 1.0
  */
+@Repository
 public class ManagePostReadRepositoryImpl extends QuerydslRepositorySupport implements ManagePostReadRepositoryCustom {
 
-    public ManagePostReadRepositoryImpl() { super(ManagePost.class); }
+    public ManagePostReadRepositoryImpl() {
+        super(ManagePost.class);
+    }
 
     /**
      * {@inheritDoc}
@@ -75,7 +79,7 @@ public class ManagePostReadRepositoryImpl extends QuerydslRepositorySupport impl
      * {@inheritDoc}
      */
     @Override
-    public ReadManagePostResponseDto findByNo(long no) {
+    public ReadManagePostResponseDto findDetailByNo(long no) {
         QManagePost managePost = QManagePost.managePost;
 
         return from(managePost)

@@ -40,6 +40,6 @@ public class ManagePostReadServiceImpl implements ManagePostReadService {
     @Transactional(readOnly = true)
     @Override
     public ReadManagePostResponseDto getManagePost(long no) {
-        return managePostReadRepository.findByNo(no);
+        return managePostReadRepository.findDetailByNo(no);
     }
 }

@@ -26,7 +26,7 @@ public interface ManagePostReadRepositoryCustom {
     /**
      * 관리게시물의 타입에 따라 페이징 조회합니다. (삭제된 게시물은 제외합니다.)
      *
-     * @param type 관리게시물 타입
+     * @param type     관리게시물 타입
      * @param pageable 페이징 정보를 담은 객체
      * @return 타입에 따라 페이징 조회된 관리게시물
      * @author : 이수정
@@ -42,5 +42,5 @@ public interface ManagePostReadRepositoryCustom {
      * @author : 이수정
      * @since : 1.0
      */
-    ReadManagePostResponseDto findByNo(long no);
+    ReadManagePostResponseDto findDetailByNo(long no);
 }

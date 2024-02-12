@@ -16,7 +16,7 @@ public interface ManagePostReadService {
     /**
      * 관리게시글을 페이징 조회합니다.
      *
-     * @param type 관리게시글 타입
+     * @param type     관리게시글 타입
      * @param pageable 페이징 정보를 담은 객체
      * @return 페이징 조회된 관리게시글
      * @author : 이수정
