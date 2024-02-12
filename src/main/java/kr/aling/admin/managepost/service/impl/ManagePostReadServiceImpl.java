@@ -1,5 +1,6 @@
 package kr.aling.admin.managepost.service.impl;
 
+import kr.aling.admin.common.dto.PageResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
 import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
@@ -28,11 +29,14 @@ public class ManagePostReadServiceImpl implements ManagePostReadService {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable) {
+    public PageResponseDto<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable) {
+        Page<ReadManagePostsResponseDto> page;
         if (type != null) {
-            return managePostReadRepository.findAllByType(type, pageable);
+            page = managePostReadRepository.findAllByType(type, pageable);
+        } else {
+            page = managePostReadRepository.findAllByAll(pageable);
         }
-        return managePostReadRepository.findAllByAll(pageable);
+        return new PageResponseDto<>(page.getPageable().getPageNumber(), page.getTotalPages(), page.getTotalElements(), page.getContent());
     }
 
     /**

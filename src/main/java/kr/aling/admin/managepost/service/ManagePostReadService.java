@@ -1,8 +1,8 @@
 package kr.aling.admin.managepost.service;
 
+import kr.aling.admin.common.dto.PageResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -22,7 +22,7 @@ public interface ManagePostReadService {
      * @author : 이수정
      * @since : 1.0
      */
-    Page<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable);
+    PageResponseDto<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable);
 
     /**
      * 번호에 해당하는 관리게시글을 상세 조회합니다.

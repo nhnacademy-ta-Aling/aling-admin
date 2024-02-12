@@ -1,6 +1,7 @@
 package kr.aling.admin.managepost.controller;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -20,7 +21,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+import kr.aling.admin.common.dto.PageResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
+import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
+import kr.aling.admin.managepost.dummy.ManagePostDummy;
+import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
 import kr.aling.admin.managepost.service.ManagePostReadService;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,6 +68,15 @@ class ManagePostReadControllerTest {
         int page = 0;
         int size = 3;
 
+        ManagePost managePost = ManagePostDummy.dummy();
+        PageResponseDto<ReadManagePostsResponseDto> responseDto = new PageResponseDto<>(
+                0,
+                1,
+                1,
+                List.of(new ReadManagePostsResponseDto(managePost.getUserNo(), managePost.getTitle(), managePost.getContent()))
+        );
+
+        when(managePostReadService.getManagePosts(any(), any())).thenReturn(responseDto);
 
         // when
         ResultActions result = mockMvc.perform(get("/api/v1/manage-posts")
@@ -84,43 +99,13 @@ class ManagePostReadControllerTest {
                         parameterWithName("page").description("페이지네이션 페이지 번호")
                 ),
                 responseFields(
-                        fieldWithPath("content").type(JsonFieldType.BOOLEAN).description("동작 성공 여부")
+                        fieldWithPath("pageNumber").type(JsonFieldType.NUMBER).description("현재 페이지"),
+                        fieldWithPath("totalPages").type(JsonFieldType.NUMBER).description("총 페이지"),
+                        fieldWithPath("totalElements").type(JsonFieldType.NUMBER).description("총 관리게시글 수"),
+                        fieldWithPath("content[].userNo").type(JsonFieldType.NUMBER).description("관리게시물 등록한 회원의 번호"),
+                        fieldWithPath("content[].type").type(JsonFieldType.STRING).description("관리게시물 타입"),
+                        fieldWithPath("content[].title").type(JsonFieldType.STRING).description("제목")
                 )));
-
-        //{
-        //    "content": [
-        //        {
-        //            "userNo": 1,
-        //            "type": "NOTICE",
-        //            "title": "공지사항 등록 테스트"
-        //        },
-        //    ],
-        //    "pageable": {
-        //        "sort": {
-        //            "empty": true,
-        //            "sorted": false,
-        //            "unsorted": true
-        //        },
-        //        "offset": 0,
-        //        "pageNumber": 0,
-        //        "pageSize": 20,
-        //        "paged": true,
-        //        "unpaged": false
-        //    },
-        //    "last": true,
-        //    "totalPages": 1,
-        //    "totalElements": 4,
-        //    "sort": {
-        //        "empty": true,
-        //        "sorted": false,
-        //        "unsorted": true
-        //    },
-        //    "size": 20,
-        //    "number": 0,
-        //    "first": true,
-        //    "numberOfElements": 4,
-        //    "empty": false
-        //}
     }
 
     @Test
