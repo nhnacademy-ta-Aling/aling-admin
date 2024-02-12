@@ -2,6 +2,7 @@ package kr.aling.admin.managepost.service.impl;
 
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostsResponseDto;
+import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
 import kr.aling.admin.managepost.repository.ManagePostReadRepository;
 import kr.aling.admin.managepost.service.ManagePostReadService;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,9 @@ public class ManagePostReadServiceImpl implements ManagePostReadService {
     @Transactional(readOnly = true)
     @Override
     public ReadManagePostResponseDto getManagePost(long no) {
+        if (!managePostReadRepository.existsById(no)) {
+            throw new ManagePostNotFoundException(no);
+        }
         return managePostReadRepository.findDetailByNo(no);
     }
 }
