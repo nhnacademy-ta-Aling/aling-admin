@@ -86,7 +86,14 @@ class ManagePostReadControllerTest {
 
         // then
         result.andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.pageNumber", equalTo(0)))
+                .andExpect(jsonPath("$.totalPages", equalTo(1)))
+                .andExpect(jsonPath("$.totalElements", equalTo(1)))
+                .andExpect(jsonPath("$.content[0].userNo", equalTo(1)))
+                .andExpect(jsonPath("$.content[0].type", equalTo(responseDto.getContent().get(0).getType())))
+                .andExpect(jsonPath("$.content[0].title", equalTo(responseDto.getContent().get(0).getTitle())));
+
 
         verify(managePostReadService, times(1)).getManagePosts(null, PageRequest.of(page, size));
 
