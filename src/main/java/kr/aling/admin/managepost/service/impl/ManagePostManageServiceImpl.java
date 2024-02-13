@@ -23,7 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * 관리 게시글 CUD Service 구현체.
+ * 관리게시글 CUD Service 구현체.
  *
  * @author : 이수정
  * @since : 1.0
@@ -46,12 +46,14 @@ public class ManagePostManageServiceImpl implements ManagePostManageService {
     @Override
     public CreateManagePostResponseDto registerManagePost(CreateManagePostRequestDto requestDto) {
         URI uri = UriComponentsBuilder.fromPath("/api/v1/users/check/" + requestDto.getUserNo())
-                        .scheme("http").host(host).port(9020)
-                        .build(false).encode().toUri();
+                .scheme("http").host(host).port(9020)
+                .build(false).encode().toUri();
 
         HttpEntity<IsExistsUserRequestDto> httpEntity = new HttpEntity<>(new HttpHeaders());
 
-        ResponseEntity<IsExistsUserResponseDto> response = restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {});
+        ResponseEntity<IsExistsUserResponseDto> response =
+                restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {
+                });
         if (Objects.requireNonNull(response.getBody()).getIsExists().equals(Boolean.FALSE)) {
             throw new UserNotFoundException(requestDto.getUserNo());
         }
