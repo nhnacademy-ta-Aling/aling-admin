@@ -72,7 +72,7 @@ class ManagePostReadControllerTest {
         PageResponseDto<ReadManagePostsResponseDto> responseDto = new PageResponseDto<>(
                 0,
                 1,
-                1,
+                1L,
                 List.of(new ReadManagePostsResponseDto(managePost.getUserNo(), managePost.getTitle(), managePost.getContent()))
         );
 
