@@ -1,6 +1,5 @@
 package kr.aling.admin.managepost.service.impl;
 
-import java.net.URI;
 import java.util.Objects;
 import javax.transaction.Transactional;
 import kr.aling.admin.managepost.dto.request.CreateManagePostRequestDto;
@@ -20,7 +19,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 /**
  * 관리게시글 CUD Service 구현체.
@@ -33,8 +31,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class ManagePostManageServiceImpl implements ManagePostManageService {
 
-    @Value("${aling.host}")
-    private String host;
+    @Value("${aling.url}")
+    private String url;
 
     private final ManagePostManageRepository managePostManageRepository;
 
@@ -45,14 +43,10 @@ public class ManagePostManageServiceImpl implements ManagePostManageService {
      */
     @Override
     public CreateManagePostResponseDto registerManagePost(CreateManagePostRequestDto requestDto) {
-        URI uri = UriComponentsBuilder.fromPath("/api/v1/users/check/" + requestDto.getUserNo())
-                .scheme("http").host(host).port(9020)
-                .build(false).encode().toUri();
-
         HttpEntity<IsExistsUserRequestDto> httpEntity = new HttpEntity<>(new HttpHeaders());
 
         ResponseEntity<IsExistsUserResponseDto> response =
-                restTemplate.exchange(uri, HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {
+                restTemplate.exchange(url + "/user/api/v1/users/check/" + requestDto.getUserNo(), HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {
                 });
         if (Objects.requireNonNull(response.getBody()).getIsExists().equals(Boolean.FALSE)) {
             throw new UserNotFoundException(requestDto.getUserNo());

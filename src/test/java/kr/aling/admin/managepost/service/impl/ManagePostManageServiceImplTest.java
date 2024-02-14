@@ -3,6 +3,7 @@ package kr.aling.admin.managepost.service.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -55,7 +56,7 @@ class ManagePostManageServiceImplTest {
         );
         IsExistsUserResponseDto isExistsUserResponse = new IsExistsUserResponseDto(Boolean.TRUE);
 
-        when(restTemplate.exchange(any(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
+        when(restTemplate.exchange(anyString(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
                 .thenReturn(ResponseEntity.ok(isExistsUserResponse));
         when(managePostManageRepository.save(any())).thenReturn(managePost);
 
@@ -79,7 +80,7 @@ class ManagePostManageServiceImplTest {
         );
         IsExistsUserResponseDto isExistsUserResponse = new IsExistsUserResponseDto(Boolean.FALSE);
 
-        when(restTemplate.exchange(any(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
+        when(restTemplate.exchange(anyString(), eq(HttpMethod.GET), any(), any(ParameterizedTypeReference.class)))
                 .thenReturn(ResponseEntity.ok(isExistsUserResponse));
 
         // then
