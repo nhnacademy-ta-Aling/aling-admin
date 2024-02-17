@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import kr.aling.admin.common.dto.PageResponseDto;
 import kr.aling.admin.managepost.dto.response.ReadManagePostResponseDto;
@@ -29,7 +28,6 @@ import kr.aling.admin.managepost.dummy.ManagePostDummy;
 import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
 import kr.aling.admin.managepost.service.ManagePostReadService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -54,12 +51,6 @@ class ManagePostReadControllerTest {
 
     @MockBean
     private ManagePostReadService managePostReadService;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @BeforeEach
-    void setUp() {}
 
     @Test
     @DisplayName("관리게시글 페이징 조회 성공")
@@ -81,8 +72,7 @@ class ManagePostReadControllerTest {
         // when
         ResultActions result = mockMvc.perform(get("/api/v1/manage-posts")
                 .param("page", String.valueOf(page))
-                .param("size", String.valueOf(size))
-                .contentType(MediaType.APPLICATION_JSON));
+                .param("size", String.valueOf(size)));
 
         // then
         result.andDo(print())
@@ -124,8 +114,7 @@ class ManagePostReadControllerTest {
         when(managePostReadService.getManagePost(no)).thenReturn(responseDto);
 
         // when
-        ResultActions result = mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/manage-posts/{no}", no)
-                .contentType(MediaType.APPLICATION_JSON));
+        ResultActions result = mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/manage-posts/{no}", no));
 
         // then
         result.andDo(print())
@@ -157,8 +146,7 @@ class ManagePostReadControllerTest {
         when(managePostReadService.getManagePost(anyLong())).thenThrow(ManagePostNotFoundException.class);
 
         // when
-        ResultActions result = mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/manage-posts/{no}", 1L)
-                .contentType(MediaType.APPLICATION_JSON));
+        ResultActions result = mockMvc.perform(RestDocumentationRequestBuilders.get("/api/v1/manage-posts/{no}", 1L));
 
         // then
         result.andDo(print())
