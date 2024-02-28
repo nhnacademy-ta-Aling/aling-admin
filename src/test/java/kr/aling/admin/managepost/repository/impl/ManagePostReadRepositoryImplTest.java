@@ -63,7 +63,8 @@ class ManagePostReadRepositoryImplTest {
         ManagePost persistManagePost = testEntityManager.persist(managePost);
 
         // when
-        Page<ReadManagePostsResponseDto> page = managePostReadRepository.findAllByType(ManagePostType.NOTICE.name(), pageable);
+        Page<ReadManagePostsResponseDto> page =
+                managePostReadRepository.findAllByType(ManagePostType.NOTICE.name(), pageable);
 
         // then
         assertThat(page).isNotNull();

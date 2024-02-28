@@ -56,7 +56,8 @@ class ManagePostReadServiceImplTest {
         }
 
         Pageable pageable = PageRequest.of(0, 3);
-        Page<ReadManagePostsResponseDto> page = new PageImpl<>(managePostsResponseDtos, pageable, managePostsResponseDtos.size());
+        Page<ReadManagePostsResponseDto> page =
+                new PageImpl<>(managePostsResponseDtos, pageable, managePostsResponseDtos.size());
 
         when(managePostReadRepository.findAllByAll(any())).thenReturn(page);
 
@@ -86,12 +87,14 @@ class ManagePostReadServiceImplTest {
         }
 
         Pageable pageable = PageRequest.of(0, 3);
-        Page<ReadManagePostsResponseDto> page = new PageImpl<>(managePostsResponseDtos, pageable, managePostsResponseDtos.size());
+        Page<ReadManagePostsResponseDto> page =
+                new PageImpl<>(managePostsResponseDtos, pageable, managePostsResponseDtos.size());
 
         when(managePostReadRepository.findAllByType(anyString(), any())).thenReturn(page);
 
         // when
-        PageResponseDto<ReadManagePostsResponseDto> responseDto = managePostReadService.getManagePosts(ManagePostType.NOTICE.name(), pageable);
+        PageResponseDto<ReadManagePostsResponseDto> responseDto =
+                managePostReadService.getManagePosts(ManagePostType.NOTICE.name(), pageable);
 
         // then
         assertThat(responseDto.getPageNumber()).isZero();
@@ -138,7 +141,8 @@ class ManagePostReadServiceImplTest {
         when(managePostReadRepository.existsById(anyLong())).thenReturn(false);
 
         // when
-        assertThatThrownBy(() -> managePostReadService.getManagePost(0L)).isInstanceOf(ManagePostNotFoundException.class);
+        assertThatThrownBy(() -> managePostReadService.getManagePost(0L)).isInstanceOf(
+                ManagePostNotFoundException.class);
 
         // then
         verify(managePostReadRepository, times(1)).existsById(anyLong());

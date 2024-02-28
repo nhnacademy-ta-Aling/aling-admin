@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("aling-user")
 public interface UserFeignClient {
 
-    @GetMapping("/check/{userNo}")
-    ResponseEntity<IsExistsUserResponseDto> isExistsUser(@PathVariable Long userNo);
+    @GetMapping("/api/v1/users/check/{userNo}")
+    ResponseEntity<IsExistsUserResponseDto> isExistsUser(@PathVariable("userNo") Long userNo);
 }
