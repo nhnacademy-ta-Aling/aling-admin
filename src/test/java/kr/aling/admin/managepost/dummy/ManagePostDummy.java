@@ -6,8 +6,8 @@ import kr.aling.admin.managepost.type.ManagePostType;
 /**
  * 관리게시글 테스트용 Dummy class.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 public class ManagePostDummy {
 

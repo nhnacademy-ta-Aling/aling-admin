@@ -7,8 +7,8 @@ import kr.aling.admin.common.valid.anno.ValidEnum;
 /**
  * Enum 검증 로직을 정의한 Validator Class.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 public class EnumValidator implements ConstraintValidator<ValidEnum, String> {
 

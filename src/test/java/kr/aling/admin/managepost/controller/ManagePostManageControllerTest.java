@@ -1,8 +1,8 @@
 package kr.aling.admin.managepost.controller;
 
-import static kr.aling.admin.util.util.RestDocsUtil.REQUIRED;
-import static kr.aling.admin.util.util.RestDocsUtil.REQUIRED_YES;
-import static kr.aling.admin.util.util.RestDocsUtil.VALID;
+import static kr.aling.admin.util.RestDocsUtil.REQUIRED;
+import static kr.aling.admin.util.RestDocsUtil.REQUIRED_YES;
+import static kr.aling.admin.util.RestDocsUtil.VALID;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;

@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 /**
  * QueryDsl 관리게시물 조회를 위한 repository.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @Repository
 public class ManagePostReadRepositoryImpl extends QuerydslRepositorySupport implements ManagePostReadRepositoryCustom {

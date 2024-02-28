@@ -7,8 +7,8 @@ import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 /**
  * 관리게시글 CUD Service interface.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 public interface ManagePostManageService {
 

@@ -1,4 +1,4 @@
-package kr.aling.admin.util.util;
+package kr.aling.admin.util;
 
 public class RestDocsUtil {
 

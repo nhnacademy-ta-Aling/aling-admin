@@ -1,6 +1,7 @@
 package kr.aling.admin.common.advice;
 
 import kr.aling.admin.common.exception.CustomException;
+import kr.aling.admin.managepost.exception.ManagePostAlreadyDeletedException;
 import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
 import kr.aling.admin.user.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -12,24 +13,40 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * 전역 예외 핸들링 class.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @Slf4j
 @RestControllerAdvice
 public class ControllerAdvice {
+
+    private static final String DEFAULT_HANDLE_MESSAGE = "[{}] {}";
+
+    /**
+     * Http Status 400에 해당하는 예외를 공통 처리합니다.
+     *
+     * @param e 400에 해당하는 예외
+     * @return 400 status response
+     * @author 이수정
+     * @since 1.0
+     */
+    @ExceptionHandler(ManagePostAlreadyDeletedException.class)
+    public ResponseEntity<String> handleBadRequestException(Exception e) {
+        log.error(DEFAULT_HANDLE_MESSAGE, HttpStatus.BAD_REQUEST, e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 
     /**
      * Http Status 404에 해당하는 예외를 공통 처리합니다.
      *
      * @param e 404에 해당하는 예외
      * @return 404 status response
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     @ExceptionHandler({UserNotFoundException.class, ManagePostNotFoundException.class})
     public ResponseEntity<String> handleNotFoundException(Exception e) {
-        log.error("[{}] {}", HttpStatus.NOT_FOUND, e.getMessage());
+        log.error(DEFAULT_HANDLE_MESSAGE, HttpStatus.NOT_FOUND, e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
@@ -38,12 +55,12 @@ public class ControllerAdvice {
      *
      * @param e CustomException
      * @return CustomException의 Http status response
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<String> handleCustomException(CustomException e) {
-        log.error("[{}] {}", e.getHttpStatus(), e.getMessage());
+        log.error(DEFAULT_HANDLE_MESSAGE, e.getHttpStatus(), e.getMessage());
         return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
     }
 }

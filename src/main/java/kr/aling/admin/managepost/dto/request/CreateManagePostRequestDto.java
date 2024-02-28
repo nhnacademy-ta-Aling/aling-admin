@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 /**
  * 관리 게시글 생성 요청 파라미터를 담는 Dto.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @Getter
 @AllArgsConstructor

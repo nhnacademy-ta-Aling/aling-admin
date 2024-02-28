@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 /**
  * ManagePost(관리 게시글) Entity.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @Getter
 @Builder
@@ -52,5 +52,15 @@ public class ManagePost extends BaseCreateTimeEntity {
     @PrePersist
     public void prePersist() {
         isDelete = !Objects.isNull(isDelete) && isDelete;
+    }
+
+    public void modifyPost(String type, String title, String content) {
+        this.type = type;
+        this.title = title;
+        this.content = content;
+    }
+
+    public void reverseIsDelete() {
+        this.isDelete = !this.isDelete;
     }
 }

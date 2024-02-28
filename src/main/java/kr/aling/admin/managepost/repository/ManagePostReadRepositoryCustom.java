@@ -9,8 +9,8 @@ import org.springframework.data.repository.NoRepositoryBean;
 /**
  * QueryDsl 관리게시물 조회를 위한 interface.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @NoRepositoryBean
 public interface ManagePostReadRepositoryCustom {
@@ -29,8 +29,8 @@ public interface ManagePostReadRepositoryCustom {
      * @param type     관리게시물 타입
      * @param pageable 페이징 정보를 담은 객체
      * @return 타입에 따라 페이징 조회된 관리게시물
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     Page<ReadManagePostsResponseDto> findAllByType(String type, Pageable pageable);
 
@@ -39,8 +39,8 @@ public interface ManagePostReadRepositoryCustom {
      *
      * @param no 관리게시물 번호
      * @return 관리게시물 상세 정보를 담은 Dto
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     ReadManagePostResponseDto findDetailByNo(long no);
 }

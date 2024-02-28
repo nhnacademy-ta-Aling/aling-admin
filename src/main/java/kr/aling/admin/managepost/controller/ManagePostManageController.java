@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 관리게시글 CUD RestController.
  *
  * @author 이수정
- * @since : 1.0
+ * @since 1.0
  */
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/manage-posts")

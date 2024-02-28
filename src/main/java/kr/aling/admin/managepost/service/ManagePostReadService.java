@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable;
 /**
  * 관리게시글 조회 Service interface.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 public interface ManagePostReadService {
 
@@ -19,8 +19,8 @@ public interface ManagePostReadService {
      * @param type     관리게시글 타입
      * @param pageable 페이징 정보를 담은 객체
      * @return 페이징 조회된 관리게시글
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     PageResponseDto<ReadManagePostsResponseDto> getManagePosts(String type, Pageable pageable);
 
@@ -29,8 +29,8 @@ public interface ManagePostReadService {
      *
      * @param no 조회할 관리게시글의 번호
      * @return 상세 조회한 관리게시글
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     ReadManagePostResponseDto getManagePost(long no);
 }
