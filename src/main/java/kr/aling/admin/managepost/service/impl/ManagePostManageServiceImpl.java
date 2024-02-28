@@ -3,6 +3,7 @@ package kr.aling.admin.managepost.service.impl;
 import java.util.Objects;
 import javax.transaction.Transactional;
 import kr.aling.admin.managepost.dto.request.CreateManagePostRequestDto;
+import kr.aling.admin.managepost.dto.request.ModifyManagePostRequestDto;
 import kr.aling.admin.managepost.dto.response.CreateManagePostResponseDto;
 import kr.aling.admin.managepost.entity.ManagePost;
 import kr.aling.admin.managepost.repository.ManagePostManageRepository;
@@ -46,8 +47,9 @@ public class ManagePostManageServiceImpl implements ManagePostManageService {
         HttpEntity<IsExistsUserRequestDto> httpEntity = new HttpEntity<>(new HttpHeaders());
 
         ResponseEntity<IsExistsUserResponseDto> response =
-                restTemplate.exchange(url + "/user/api/v1/users/check/" + requestDto.getUserNo(), HttpMethod.GET, httpEntity, new ParameterizedTypeReference<>() {
-                });
+                restTemplate.exchange(url + "/user/api/v1/users/check/" + requestDto.getUserNo(), HttpMethod.GET,
+                        httpEntity, new ParameterizedTypeReference<>() {
+                        });
         if (Objects.requireNonNull(response.getBody()).getIsExists().equals(Boolean.FALSE)) {
             throw new UserNotFoundException(requestDto.getUserNo());
         }
@@ -60,5 +62,15 @@ public class ManagePostManageServiceImpl implements ManagePostManageService {
                 .build();
         managePost = managePostManageRepository.save(managePost);
         return new CreateManagePostResponseDto(managePost.getManagePostNo());
+    }
+
+    @Override
+    public void modifyManagePost(Long managePostNo, ModifyManagePostRequestDto requestDto) {
+
+    }
+
+    @Override
+    public void deleteManagePost(Long managePostNo) {
+
     }
 }

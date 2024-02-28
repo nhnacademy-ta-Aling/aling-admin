@@ -41,7 +41,7 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-@AutoConfigureRestDocs(outputDir = "target/snippets")
+@AutoConfigureRestDocs
 @MockBean(JpaMetamodelMappingContext.class)
 @WebMvcTest(ManagePostReadController.class)
 class ManagePostReadControllerTest {
@@ -64,7 +64,8 @@ class ManagePostReadControllerTest {
                 0,
                 1,
                 1L,
-                List.of(new ReadManagePostsResponseDto(managePost.getUserNo(), managePost.getTitle(), managePost.getContent()))
+                List.of(new ReadManagePostsResponseDto(managePost.getUserNo(), managePost.getTitle(),
+                        managePost.getContent()))
         );
 
         when(managePostReadService.getManagePosts(any(), any())).thenReturn(responseDto);
@@ -83,7 +84,6 @@ class ManagePostReadControllerTest {
                 .andExpect(jsonPath("$.content[0].userNo", equalTo(1)))
                 .andExpect(jsonPath("$.content[0].type", equalTo(responseDto.getContent().get(0).getType())))
                 .andExpect(jsonPath("$.content[0].title", equalTo(responseDto.getContent().get(0).getTitle())));
-
 
         verify(managePostReadService, times(1)).getManagePosts(null, PageRequest.of(page, size));
 
@@ -110,7 +110,8 @@ class ManagePostReadControllerTest {
     void getManagePost() throws Exception {
         // given
         long no = 1L;
-        ReadManagePostResponseDto responseDto = new ReadManagePostResponseDto(1L, "NOTICE", "Test Title", "Test Content");
+        ReadManagePostResponseDto responseDto =
+                new ReadManagePostResponseDto(1L, "NOTICE", "Test Title", "Test Content");
         when(managePostReadService.getManagePost(no)).thenReturn(responseDto);
 
         // when
