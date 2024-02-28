@@ -1,0 +1,19 @@
+:toc:
+
+==== 관리게시글 삭제
+
+관리게시글 삭제 API
+
+===== 요청
+
+operation::delete-manage-post[snippets='http-request']
+
+===== 응답
+
+operation::delete-manage-post[snippets='http-response']
+
+===== 파라미터 설명
+
+====== 요청 Path Variable
+
+operation::delete-manage-post[snippets='path-parameters']

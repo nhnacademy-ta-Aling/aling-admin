@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 /**
  * Inquiry(문의) Entity.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

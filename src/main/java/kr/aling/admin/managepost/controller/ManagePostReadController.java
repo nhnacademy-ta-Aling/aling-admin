@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 관리게시글 조회 RestController.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/manage-posts")
@@ -33,8 +33,8 @@ public class ManagePostReadController {
      * @param type     관리게시물 타입
      * @param pageable 페이징 정보를 담은 객체
      * @return 페이징 조회된 관리게시글
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     @GetMapping
     public ResponseEntity<PageResponseDto<ReadManagePostsResponseDto>> getManagePosts(
@@ -47,8 +47,8 @@ public class ManagePostReadController {
      *
      * @param no 조회할 관리게시글의 번호
      * @return 상세 조회한 관리게시글
-     * @author : 이수정
-     * @since : 1.0
+     * @author 이수정
+     * @since 1.0
      */
     @GetMapping("/{no}")
     public ResponseEntity<ReadManagePostResponseDto> getManagePost(@PathVariable long no) {

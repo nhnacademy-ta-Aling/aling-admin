@@ -1,0 +1,6 @@
+=== 관리게시글 (ManagePost)
+
+include::../managepost/manage-post-get.adoc[]
+include::../managepost/manage-post-post.adoc[]
+include::../managepost/manage-post-put.adoc[]
+include::../managepost/manage-post-delete.adoc[]

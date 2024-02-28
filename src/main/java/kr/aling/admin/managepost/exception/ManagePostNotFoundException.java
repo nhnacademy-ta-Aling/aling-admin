@@ -3,8 +3,8 @@ package kr.aling.admin.managepost.exception;
 /**
  * 관리게시물이 존재하지 않을 때 발생하는 Exception.
  *
- * @author : 이수정
- * @since : 1.0
+ * @author 이수정
+ * @since 1.0
  */
 public class ManagePostNotFoundException extends RuntimeException {
 

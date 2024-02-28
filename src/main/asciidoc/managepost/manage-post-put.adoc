@@ -1,0 +1,23 @@
+:toc:
+
+==== 관리게시글 수정
+
+관리게시글 수정 API
+
+===== 요청
+
+operation::modify-manage-post[snippets='http-request']
+
+===== 응답
+
+operation::modify-manage-post[snippets='http-response']
+
+===== 파라미터 설명
+
+====== 요청 Path Variable
+
+operation::modify-manage-post[snippets='path-parameters']
+
+====== 요청 Body
+
+operation::modify-manage-post[snippets='request-fields']

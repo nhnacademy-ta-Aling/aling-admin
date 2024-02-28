@@ -1,0 +1,47 @@
+:toc:
+
+==== 관리게시글 페이징 조회
+
+관리게시글을 페이징 조회하고 type에 따라 분류 가능한 API
+
+===== 요청
+
+operation::get-manage-posts[snippets='http-request']
+
+===== 응답
+
+operation::get-manage-posts[snippets='http-response']
+
+===== 파라미터 설명
+
+====== 요청 Request Parameter
+
+operation::get-manage-posts[snippets='request-parameters']
+
+====== 응답 Body
+
+operation::get-manage-posts[snippets='response-fields']
+
+
+==== 관리게시글 상세 조회
+
+관리게시글의 번호로 상세 조회 API
+
+===== 요청
+
+operation::get-manage-post[snippets='http-request']
+
+===== 응답
+
+operation::get-manage-post[snippets='http-response']
+
+===== 파라미터 설명
+
+====== 요청 Path Variable
+
+operation::get-manage-post[snippets='path-parameters']
+
+====== 응답 Body
+
+operation::get-manage-post[snippets='response-fields']
+
