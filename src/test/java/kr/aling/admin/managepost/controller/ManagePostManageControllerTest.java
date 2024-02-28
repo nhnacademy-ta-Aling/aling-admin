@@ -104,7 +104,7 @@ class ManagePostManageControllerTest {
                         fieldWithPath("title").type(JsonFieldType.STRING).description("제목")
                                 .attributes(key("valid").value("Not Blank, 최대 100자")),
                         fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
-                                .attributes(key("valid").value("Not Blank"))
+                                .attributes(key("valid").value("Not Blank, 최대 10000자"))
                 ),
                 responseFields(
                         fieldWithPath("managePostNo").type(JsonFieldType.NUMBER).description("관리게시글 번호")
@@ -181,7 +181,7 @@ class ManagePostManageControllerTest {
                                 .attributes(key(VALID).value("Not Blank, 최대 100자")),
                         fieldWithPath("content").type(JsonFieldType.STRING).description("내용")
                                 .attributes(key(REQUIRED).value(REQUIRED_YES))
-                                .attributes(key(VALID).value("Not Blank"))
+                                .attributes(key(VALID).value("Not Blank, 최대 10000자"))
                 )));
     }
 

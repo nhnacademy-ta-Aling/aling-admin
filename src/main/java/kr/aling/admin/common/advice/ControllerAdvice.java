@@ -1,5 +1,6 @@
 package kr.aling.admin.common.advice;
 
+import kr.aling.admin.common.dto.ErrorResponseDto;
 import kr.aling.admin.common.exception.CustomException;
 import kr.aling.admin.managepost.exception.ManagePostAlreadyDeletedException;
 import kr.aling.admin.managepost.exception.ManagePostNotFoundException;
@@ -7,6 +8,7 @@ import kr.aling.admin.user.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -30,10 +32,10 @@ public class ControllerAdvice {
      * @author 이수정
      * @since 1.0
      */
-    @ExceptionHandler(ManagePostAlreadyDeletedException.class)
-    public ResponseEntity<String> handleBadRequestException(Exception e) {
+    @ExceptionHandler({ManagePostAlreadyDeletedException.class, MethodArgumentNotValidException.class})
+    public ResponseEntity<ErrorResponseDto> handleBadRequestException(Exception e) {
         log.error(DEFAULT_HANDLE_MESSAGE, HttpStatus.BAD_REQUEST, e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(e.getMessage()));
     }
 
     /**
@@ -45,9 +47,9 @@ public class ControllerAdvice {
      * @since 1.0
      */
     @ExceptionHandler({UserNotFoundException.class, ManagePostNotFoundException.class})
-    public ResponseEntity<String> handleNotFoundException(Exception e) {
+    public ResponseEntity<ErrorResponseDto> handleNotFoundException(Exception e) {
         log.error(DEFAULT_HANDLE_MESSAGE, HttpStatus.NOT_FOUND, e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(e.getMessage()));
     }
 
     /**
@@ -59,8 +61,8 @@ public class ControllerAdvice {
      * @since 1.0
      */
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<String> handleCustomException(CustomException e) {
+    public ResponseEntity<ErrorResponseDto> handleCustomException(CustomException e) {
         log.error(DEFAULT_HANDLE_MESSAGE, e.getHttpStatus(), e.getMessage());
-        return ResponseEntity.status(e.getHttpStatus()).body(e.getMessage());
+        return ResponseEntity.status(e.getHttpStatus()).body(new ErrorResponseDto(e.getMessage()));
     }
 }

@@ -29,5 +29,6 @@ public class ModifyManagePostRequestDto {
     private String title;
 
     @NotBlank
+    @Size(max = 10000)
     private String content;
 }
